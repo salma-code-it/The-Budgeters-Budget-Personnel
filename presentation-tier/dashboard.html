@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Budget Management System</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="dashboard-container">
+        <nav class="sidebar">
+            <div class="user-info">
+                <h3 id="username">Loading...</h3>
+                <p id="email">Loading...</p>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#" class="active" data-section="overview">Overview</a></li>
+                <li><a href="#" data-section="budget">Budget</a></li>
+                <li><a href="#" data-section="expenses">Expenses</a></li>
+                <li><a href="#" data-section="income">Income</a></li>
+                <li><a href="#" data-section="reports">Reports</a></li>
+            </ul>
+            <button id="logoutBtn" class="btn">Logout</button>
+        </nav>
+
+        <main class="main-content">
+            <div id="overview" class="section active">
+                <h2>Overview</h2>
+                <div class="dashboard-cards">
+                    <div class="card">
+                        <h3>Total Budget</h3>
+                        <p id="totalBudget">$0.00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Expenses</h3>
+                        <p id="totalExpenses">$0.00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Total Income</h3>
+                        <p id="totalIncome">$0.00</p>
+                    </div>
+                    <div class="card">
+                        <h3>Balance</h3>
+                        <p id="balance">$0.00</p>
+                    </div>
+                </div>
+
+                <div class="analytics-container">
+                    <div class="chart-container">
+                        <h3>Monthly Overview</h3>
+                        <canvas id="monthlyChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Expense Categories</h3>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Income vs Expenses</h3>
+                        <canvas id="comparisonChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Budget Progress</h3>
+                        <canvas id="progressChart"></canvas>
+                    </div>
+                </div>
+
+                <div class="recent-transactions">
+                    <h3>Recent Transactions</h3>
+                    <div class="transaction-list" id="recentTransactions">
+                        <!-- Transactions will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <div id="budget" class="section hidden">
+                <h2>Budget Management</h2>
+                <div class="budget-controls">
+                    <button id="addBudgetBtn" class="btn">Add Budget</button>
+                </div>
+                <div id="budgetList" class="list-container">
+                    <!-- Budget items will be added here dynamically -->
+                </div>
+            </div>
+
+            <div id="expenses" class="section hidden">
+                <h2>Expenses</h2>
+                <div class="expense-controls">
+                    <button id="addExpenseBtn" class="btn">Add Expense</button>
+                </div>
+                <div id="expenseList" class="list-container">
+                    <!-- Expense items will be added here dynamically -->
+                </div>
+            </div>
+
+            <div id="income" class="section hidden">
+                <h2>Income</h2>
+                <div class="income-controls">
+                    <button id="addIncomeBtn" class="btn">Add Income</button>
+                </div>
+                <div id="incomeList" class="list-container">
+                    <!-- Income items will be added here dynamically -->
+                </div>
+            </div>
+
+            <div id="reports" class="section hidden">
+                <h2>Reports</h2>
+                <div class="report-controls">
+                    <select id="reportType">
+                        <option value="monthly">Monthly Report</option>
+                        <option value="yearly">Yearly Report</option>
+                        <option value="category">Category Report</option>
+                    </select>
+                    <button id="generateReportBtn" class="btn">Generate Report</button>
+                </div>
+                <div id="reportContent" class="report-container">
+                    <!-- Report content will be added here dynamically -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modal for adding new items -->
+    <div id="addItemModal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3 id="modalTitle">Add Item</h3>
+            <form id="addItemForm">
+                <div class="form-group">
+                    <label for="itemName">Name</label>
+                    <input type="text" id="itemName" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemAmount">Amount</label>
+                    <input type="number" id="itemAmount" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemCategory">Category</label>
+                    <select id="itemCategory" required>
+                        <option value="">Select a category</option>
+                        <option value="food">Food</option>
+                        <option value="transportation">Transportation</option>
+                        <option value="housing">Housing</option>
+                        <option value="utilities">Utilities</option>
+                        <option value="entertainment">Entertainment</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="itemDate">Date</label>
+                    <input type="date" id="itemDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="itemDescription">Description</label>
+                    <textarea id="itemDescription"></textarea>
+                </div>
+                <button type="submit" class="btn">Save</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/dashboard.js"></script>
+</body>
+</html> 
